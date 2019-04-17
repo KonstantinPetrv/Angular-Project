@@ -1,0 +1,38 @@
+.top-buffer {
+    margin-top: 10px;
+}
+
+.left-buffer {
+    margin-left: 20px;
+}
+
+.img-pos {
+    height:200px;
+    width: 100%;
+    margin-left:-15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.item-center {
+    text-align: center;
+}
+
+.price{
+    color: #ff9f1a;
+    text-transform: UPPERCASE;
+    font-weight: bold;
+    margin-left: 20px;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.div-container {
+    max-width: 200px;
+    min-width: 200px;
+    border: solid 4px transparent;
+    padding: 0px;
+    overflow: auto;
+}

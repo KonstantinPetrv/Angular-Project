@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="card mb-3 div-container left-buffer" *ngFor="let p of products$ | async">
+    <img  class="img-pos" [src]="p.image" alt="Card image">
+    <div class="card-body">
+      <p class="card-text item-center">{{p.title}}</p>
+    </div>
+    <h6 class="price">{{p.price}}$</h6>
+    <div class="card-footer text-muted item-center">
+      <button class="btn btn-primary" [routerLink]="['/product/details', p._id]">View details</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- style="height: 200px; width: 100%; display: block;" -->
