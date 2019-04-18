@@ -7,6 +7,7 @@ const baseUrl = 'http://localhost:9999/product';
 const getAllP = baseUrl + '/all';
 const getSingleP = baseUrl + '/details/';
 const postP = baseUrl + '/create';
+const putP = baseUrl + '/edit/';
 const deleteP = baseUrl + '/delete/';
 
 @Injectable({
@@ -17,6 +18,10 @@ export class ProductService {
 
     postProduct(data) {
         return this.http.post(postP, data);
+    }
+
+    putProduct(id, data) {
+        return this.http.post(putP + id, data);
     }
 
     getAllProducts() {

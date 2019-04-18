@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     this.authService
       .register(this.form.value)
       .subscribe((data) => {
-        if (!data.success) {
+        if (!data['success']) {
           return;
         }
         this.authService
@@ -31,8 +31,11 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-
   get f() {
     return this.form.controls
+  }
+
+  get invalid() {
+    return this.form.invalid
   }
 }

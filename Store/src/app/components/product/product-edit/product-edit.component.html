@@ -1,3 +1,47 @@
-<p>
-  product-edit works!
-</p>
+<ng-template [ngIf]="product">
+  <div class="col-md-6 container">
+    <form [formGroup]="form">
+      <div class="form-group form-inline top-buffer">
+        <label class="label label-default col-2" for="title">Title&#58; </label>
+        <input type="text" class="form-control col-8" formControlName="title" id="title" placeholder="Title" />
+      </div>
+      <div class="alert alert-danger" *ngIf="f.title.touched && f.title.errors?.required">
+        This field is required!
+      </div>
+      <div class="form-group form-inline top-buffer">
+        <label class="label label-default col-2" for="password">Description&#58; </label>
+        <textarea type="description" class="form-control col-8" formControlName="description" id="description"
+          placeholder="Description" rows="4">
+              </textarea>
+      </div>
+      <div class="alert alert-danger" *ngIf="f.description.touched && f.description.errors?.required">
+        This field is required!
+      </div>
+      <div class="alert alert-danger" *ngIf="f.description.errors?.minlength">
+        Description must be atleast 5 characheters long.
+      </div>
+      <div class="form-group form-inline top-buffer">
+        <label class="label label-default col-2" for="price">Price&#58; </label>
+        <input type="number" class="form-control col-8" formControlName="price" id="price" placeholder="Price" min="0"
+          step="0.01" />
+      </div>
+      <div class="alert alert-danger" *ngIf="f.price.touched && f.price.errors?.required">
+        This field is required!
+      </div>
+      <div class="alert alert-danger" *ngIf="f.price.errors?.min">
+        Pricem must be greater than 0.
+      </div>
+      <div class="form-group form-inline top-buffer">
+        <label class="label label-default col-2" for="image">Image Url&#58; </label>
+        <input type="text" class="form-control col-8" formControlName="image" id="image" placeholder="Url" />
+      </div>
+      <div class="alert alert-danger" *ngIf="f.image.touched && f.image.errors?.required">
+        This field is required!
+      </div>
+      <div class="float-right col-3">
+        <button type="submit" class="btn btn-warning top-buffer" [disabled]="invalid"
+          (click)="updateProduct()">Edit</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

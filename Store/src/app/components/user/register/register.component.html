@@ -1,7 +1,6 @@
-<div class="col-md-6 container">
-    {{form.value | json}}
+<div class="col-md-6 container top-buffer">
     <form [formGroup]="form">
-      <div class="form-group form-inline top-buffer">
+      <div class="form-group form-inline">
         <label class="label label-default col-2" for="username">Username&#58; </label>
         <input type="text" class="form-control col-8" formControlName="username" id="username" placeholder="Username" />
       </div>
@@ -23,7 +22,7 @@
         Password must be atleast 3 characheters long.
       </div>
       <div class="float-right col-3">
-        <button type="submit" class="btn btn-primary top-buffer" (click)="register()">Register</button>
+        <button type="submit" class="btn btn-primary top-buffer" [disabled]="invalid" (click)="register()">Register</button>
       </div>
     </form>
   </div>

@@ -14,10 +14,10 @@ export class ProductCreateComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]{4,}/)]],
-      description: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]{3,}/)]],
-      price: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]{3,}/)]],
-      image: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]{3,}/)]]
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.minLength(5)]],
+      price: ['', [Validators.required, Validators.min(0.01)]],
+      image: ['', [Validators.required]]
     });
   }
 
@@ -30,5 +30,13 @@ export class ProductCreateComponent implements OnInit {
         }
         this.router.navigate(['/']);
       })
+  }
+
+  get f() {
+    return this.form.controls
+  }
+
+  get invalid() {
+    return this.form.invalid
   }
 }
