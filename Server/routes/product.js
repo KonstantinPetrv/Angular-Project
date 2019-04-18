@@ -46,9 +46,9 @@ function validateProductForm(payload) {
     }
 }
 
-router.post('/create', (req, res) => {
+router.post('/create', authCheck, (req, res) => {
     const productObj = req.body;
-    if (productObj.roles.indexOf('Admin') > -1) {
+    if (req.user.roles.indexOf('Admin') > -1) {
         const validationResult = validateProductForm(productObj)
         if (!validationResult.success) {
             return res.status(200).json({
@@ -57,9 +57,6 @@ router.post('/create', (req, res) => {
                 errors: validationResult.errors
             })
         }
-
-        delete productObj.roles;
-
         Product
             .create(productObj)
             .then((createProduct) => {
@@ -90,8 +87,7 @@ router.post('/create', (req, res) => {
 
 router.post('/edit/:id', authCheck, (req, res) => {
     const productObj = req.body
-    if (productObj.roles.indexOf('Admin') > -1) {
-        delete productObj.roles;
+    if (req.user.roles.indexOf('Admin') > -1) {
         const productId = req.params.id
         const validationResult = validateProductForm(productObj)
         if (!validationResult.success) {
@@ -101,7 +97,6 @@ router.post('/edit/:id', authCheck, (req, res) => {
                 errors: validationResult.errors
             })
         }
-
         Product
             .findById(productId)
             .then(existingProduct => {
@@ -187,7 +182,7 @@ router.get('/details/:id', (req, res) => {
 
 router.delete('/delete/:id', authCheck, (req, res) => {
     const id = req.params.id
-    if (req.body.roles.indexOf('Admin') > -1) {
+    if (req.user.roles.indexOf('Admin') > -1) {
         Product
             .findById(id)
             .then((product) => {

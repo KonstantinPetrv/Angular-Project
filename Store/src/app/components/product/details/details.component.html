@@ -16,27 +16,23 @@
             </div>
             <h4 class="price">current price&#58; <span>{{ product.price.toFixed(2)}}&#36;</span></h4>
             <div class="action">
-              <!-- {
-              this.state.inCart
-              ? <button class="btn btn-primary" type="button" onClick={()=> this.removeProduct()}>Remove from
-                cart</button>
-              : <button class="btn btn-primary" type="button" onClick={()=> this.addProduct()}>Add to cart</button>
-              }
-              {
-              window.localStorage.getItem('roles') ?
-              window.localStorage.getItem('roles').includes('Admin') ? ( -->
-              <!-- <div class="top-buffer">
-                <a routerLink={`/product/edit/${this.props.match.params.id}`}> <button class="btn btn-warning"
-                  type="button"><span class="fa fa-heart">Edit</span></button>
-                </a>
-                <a routerLink={`/product/delete/${this.props.match.params.id}`}> <button
-                  class="btn btn-danger btn-left-spacing" type="button"><span
-                    class="fa fa-heart">Delete</span></button>
-                </a>
-              </div>
-              ) : null
-              : null
-              } -->
+              <ng-template [ngIf]="actionType">
+                <button class="btn btn-primary" type="button" (click)="addToCart()">Add to cart</button>
+              </ng-template>
+              <ng-template [ngIf]="!actionType">
+                <button class="btn btn-primary" type="button" (click)="removeFromCart()">Remove from cart</button>
+              </ng-template>
+              <ng-template [ngIf]="isAdmin">
+                <div class="top-buffer">
+                  <a [routerLink]="['/product/edit', id]">
+                    <button class="btn btn-warning" type="button"><span class="fa fa-heart">Edit</span></button>
+                  </a>
+                  <a [routerLink]="['/product/delete', id]">
+                    <button class="btn btn-danger btn-left-spacing" type="button"><span
+                        class="fa fa-heart">Delete</span></button>
+                  </a>
+                </div>
+              </ng-template>
             </div>
           </div>
         </div>

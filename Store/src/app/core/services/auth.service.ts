@@ -19,12 +19,12 @@ export class AuthService {
     login(body) {
         return this.http.post(loginUrl, body)
             .subscribe((data) => {
-                if (!data.success) {
+                if (!data['success']) {
                     return;
                 }
-                localStorage.setItem('username', data.user.username);
-                localStorage.setItem('roles', data.user.roles);
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('username', data['user'].username);
+                localStorage.setItem('roles', data['user'].roles);
+                localStorage.setItem('token', data['token']);
                 this.router.navigate(['/']);
             });
     }

@@ -13,10 +13,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -26,7 +23,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['/signin']);
+    this.router.navigate(['user/login']);
 
     return false;
   }
