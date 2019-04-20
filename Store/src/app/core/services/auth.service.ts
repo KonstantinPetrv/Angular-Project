@@ -38,6 +38,7 @@ export class AuthService {
         let cart = localStorage.getItem('cart');
         localStorage.clear();
         localStorage.setItem('cart', cart);
+        this.router.navigate(['/']);
     }
 
     isAuthenticated() {
@@ -45,11 +46,20 @@ export class AuthService {
     }
 
     isAdmin() {
-        return localStorage.getItem('roles').includes('Admin')
+        let roles = localStorage.getItem('roles');
+        if (roles !== null) {
+            return roles.includes('Admin');
+        }
+        return false;
     }
 
     getToken() {
         let token = localStorage.getItem('token');
         return token;
+    }
+
+    getUsername() {
+        let username = localStorage.getItem('username');
+        return username;
     }
 }
