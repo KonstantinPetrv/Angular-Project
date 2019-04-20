@@ -14,12 +14,14 @@
       <tbody *ngFor='let o of orders$ | async'>
         <tr>
           <td class="">{{o.status}}</td>
-          <td class="text-center">Username</td>
-          <td class="" ><span *ngFor='let p of o.products'><p>{{p.title}}</p></span></td>
-          <td class="price text-center">10 shmakarooos&#36;</td>
+          <td class="text-center">{{o.creator['username']}}</td>
+          <td class=""><span *ngFor='let p of o.products'>
+              <p>{{p.title}}</p>
+            </span></td>
+          <td class="price text-center">{{totalPrice(o.products).toFixed(2)}}&#36;</td>
           <td class="text-center">
-            <button class="btn btn-primary">Approve</button>
-            <button class="btn btn-danger">Cancel</button>
+            <button class="btn btn-primary" (click)="approveOrder(o['_id'])">Approve</button>
+            <button class="btn btn-danger" (click)="cancelOrder(o['_id'])">Cancel</button>
           </td>
         </tr>
       </tbody>

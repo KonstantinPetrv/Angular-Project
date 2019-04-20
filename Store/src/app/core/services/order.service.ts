@@ -7,10 +7,10 @@ import { Order } from 'src/app/components/shared/models/order.model';
 const baseUrl = 'http://localhost:9999/orders';
 const postO = baseUrl + '/submit'
 const getPendingO = baseUrl + '/pending';
-// const getSingleP = baseUrl + '/details/';
+const approveO = baseUrl + '/approve/';
+const deleteO = baseUrl + '/delete/';
 // const postP = baseUrl + '/create';
 // const putP = baseUrl + '/edit/';
-// const deleteP = baseUrl + '/delete/';
 // const cartP = baseUrl + '/order';
 
 @Injectable({
@@ -23,23 +23,24 @@ export class OrderService {
         return this.http.post(postO, data);
     }
 
-    // putProduct(id, data) {
-    //     return this.http.post(putP + id, data);
-    // }
-
     getPendingOrders() {
         return this.http.get<Array<Order>>(getPendingO);
     }
 
-    // getCartProducts(id) {
-    //     return this.http.post<Array<Product>>(cartP, id);
+    postApproveOrder(id) {
+        return this.http.post<Array<Order>>(approveO + id, {});
+    }
+
+    deleteOrder(id) {
+        return this.http.delete(deleteO + id);
+    }
+
+    // putProduct(id, data) {
+    //     return this.http.post(putP + id, data);
     // }
 
     // getProduct(id): Observable<Product> {
     //     return this.http.get<Product>(getSingleP + id);
     // }
 
-    // deleteProduct(id) {
-    //     return this.http.delete(deleteP + id);
-    // }
 }

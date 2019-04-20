@@ -16,4 +16,33 @@ export class OrderPendingComponent implements OnInit {
     this.orders$ = this.orderService.getPendingOrders();
   }
 
+  approveOrder(id) {
+    this.orderService
+      .postApproveOrder(id)
+      .subscribe((data) => {
+        if (!data['success']) {
+          return;
+        }
+
+      })
+  }
+
+  cancelOrder(id) {
+    this.orderService
+      .deleteOrder(id)
+      .subscribe((data) => {
+        if (!data['success']) {
+          return;
+        }
+      })
+  }
+
+  totalPrice(products) {
+    let price = 0;
+    products.forEach(p => {
+      price += p.price;
+    });
+    return price;
+  }
+
 }
