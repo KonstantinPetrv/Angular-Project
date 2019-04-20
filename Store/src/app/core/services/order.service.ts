@@ -9,6 +9,7 @@ const postO = baseUrl + '/submit'
 const getPendingO = baseUrl + '/pending';
 const approveO = baseUrl + '/approve/';
 const deleteO = baseUrl + '/delete/';
+const historyO = baseUrl + '/user';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +23,10 @@ export class OrderService {
 
     getPendingOrders() {
         return this.http.get<Array<Order>>(getPendingO);
+    }
+
+    getOrderHistory() {
+        return this.http.get<Array<Order>>(historyO);
     }
 
     postApproveOrder(id) {

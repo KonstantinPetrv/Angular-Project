@@ -1,3 +1,23 @@
-<p>
-  order-history works!
-</p>
+<ng-template [ngIf]='orders$'>
+  <div class="container top-buffer">
+    <h2>Pending Orders</h2>
+    <table class="table table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="text-center">Status</th>
+          <th scope="col" class="text-center">Products</th>
+          <th scope="col" class="text-center">Price</th>
+        </tr>
+      </thead>
+      <tbody *ngFor='let o of orders$ | async'>
+        <tr>
+          <td class="item-center {{orderStatus(o.status)}}">{{o.status}}</td>
+          <td class=""><span *ngFor='let p of o.products'>
+              <p>{{p.title}}</p>
+            </span></td>
+          <td class="price text-center">{{totalPrice(o.products).toFixed(2)}}&#36;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>
