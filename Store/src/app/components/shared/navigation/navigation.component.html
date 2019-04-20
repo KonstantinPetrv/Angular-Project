@@ -20,7 +20,7 @@
         <a class="nav-link" routerLink="/user/register">Register</a>
       </li>
       <li class="nav-item" *ngIf="authService.isAuthenticated()">
-        <a class="nav-link" routerLink="/home">{{authService.getUsername()}}</a>
+        <a class="nav-link" routerLink="/order/history">{{authService.getUsername()}}</a>
       </li>
       <li class="nav-item" *ngIf="authService.isAuthenticated()">
         <a class="nav-link" (click)="logout()">Logout</a>
