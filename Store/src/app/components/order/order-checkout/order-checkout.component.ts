@@ -4,6 +4,7 @@ import { Product } from '../../shared/models/product.model';
 import { ProductService } from 'src/app/core/services/product.service';
 import { OrderService } from 'src/app/core/services/order.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-checkout',
@@ -12,7 +13,12 @@ import { Router } from '@angular/router';
 })
 export class OrderCheckoutComponent implements OnInit {
   products$: Observable<Array<Product>>;
-  constructor(private productService: ProductService, private orderService: OrderService, private router: Router) { }
+  constructor(
+    private productService: ProductService,
+    private orderService: OrderService,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     let ids = localStorage.getItem('cart').trim().split(',');
@@ -34,8 +40,10 @@ export class OrderCheckoutComponent implements OnInit {
       .postOrder(data)
       .subscribe((data) => {
         if (!data['success']) {
+          this.toastr.error('Something went wrong with your order.');
           return;
         }
+        this.toastr.success('Order created.');
         localStorage.setItem('cart', '');
         this.router.navigate(['/']);
       });

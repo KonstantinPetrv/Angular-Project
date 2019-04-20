@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-create',
@@ -10,7 +11,12 @@ import { Router } from '@angular/router';
 })
 export class ProductCreateComponent implements OnInit {
   form;
-  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private router: Router,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -26,8 +32,10 @@ export class ProductCreateComponent implements OnInit {
       .postProduct(this.form.value)
       .subscribe((data) => {
         if (!data['success']) {
+          this.toastr.error('Something went wrong.');
           return;
         }
+        this.toastr.success('Product created.');
         this.router.navigate(['/']);
       })
   }

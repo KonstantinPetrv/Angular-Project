@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../../shared/models/order.model';
 import { OrderService } from 'src/app/core/services/order.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-pending',
@@ -10,7 +11,7 @@ import { OrderService } from 'src/app/core/services/order.service';
 })
 export class OrderPendingComponent implements OnInit {
   orders$: Observable<Array<Order>>;
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.orders$ = this.orderService.getPendingOrders();
@@ -21,9 +22,10 @@ export class OrderPendingComponent implements OnInit {
       .postApproveOrder(id)
       .subscribe((data) => {
         if (!data['success']) {
+          this.toastr.error('Someting went wrong');
           return;
         }
-
+        this.toastr.success('Order approved.');
       })
   }
 
@@ -32,8 +34,10 @@ export class OrderPendingComponent implements OnInit {
       .deleteOrder(id)
       .subscribe((data) => {
         if (!data['success']) {
+          this.toastr.error('Someting went wrong.');
           return;
         }
+        this.toastr.success('Order canceled');
       })
   }
 

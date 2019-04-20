@@ -7,6 +7,8 @@ import { NavigationComponent } from './components/shared/navigation/navigation.c
 import { HomeComponent } from './components/home/home.component';
 import { ProductService } from './core/services/product.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { ToastrModule } from 'ngx-toastr';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.service';
@@ -20,9 +22,11 @@ import { JwtInterceptorService } from './core/interceptors/jwt-interceptor.servi
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     ProductService,

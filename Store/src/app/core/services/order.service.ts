@@ -9,9 +9,6 @@ const postO = baseUrl + '/submit'
 const getPendingO = baseUrl + '/pending';
 const approveO = baseUrl + '/approve/';
 const deleteO = baseUrl + '/delete/';
-// const postP = baseUrl + '/create';
-// const putP = baseUrl + '/edit/';
-// const cartP = baseUrl + '/order';
 
 @Injectable({
     providedIn: 'root'
@@ -34,13 +31,4 @@ export class OrderService {
     deleteOrder(id) {
         return this.http.delete(deleteO + id);
     }
-
-    // putProduct(id, data) {
-    //     return this.http.post(putP + id, data);
-    // }
-
-    // getProduct(id): Observable<Product> {
-    //     return this.http.get<Product>(getSingleP + id);
-    // }
-
 }

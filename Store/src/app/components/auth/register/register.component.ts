@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   form;
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
       .register(this.form.value)
       .subscribe((data) => {
         if (!data['success']) {
+          this.toastr.error('username is allready taken.');
           return;
         }
         this.authService

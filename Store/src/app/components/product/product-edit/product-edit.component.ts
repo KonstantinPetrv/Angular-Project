@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Product } from '../../shared/models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-edit',
@@ -13,7 +14,13 @@ export class ProductEditComponent implements OnInit {
   form;
   product: Product;
   id: string;
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
@@ -37,9 +44,10 @@ export class ProductEditComponent implements OnInit {
       .putProduct(this.id, this.form.value)
       .subscribe((data) => {
         if (!data['success']) {
+          this.toastr.error('Something went wrong.');
           return;
         }
-
+        this.toastr.success('Product edited.');
         this.router.navigate(['/product/details/' + this.id])
       })
   }

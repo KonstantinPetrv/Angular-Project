@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../shared/models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-delete',
@@ -11,7 +12,12 @@ import { ProductService } from 'src/app/core/services/product.service';
 export class ProductDeleteComponent implements OnInit {
   id: string;
   product: Product;
-  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
@@ -26,6 +32,7 @@ export class ProductDeleteComponent implements OnInit {
     this.productService
       .deleteProduct(this.id)
       .subscribe((data) => {
+        this.toastr.success('Product deleted');
         this.router.navigate(['/']);
       })
   }

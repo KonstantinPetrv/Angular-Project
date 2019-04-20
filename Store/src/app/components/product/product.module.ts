@@ -5,8 +5,8 @@ import { DetailsComponent } from './details/details.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductDeleteComponent } from './product-delete/product-delete.component';
 import { RouterModule } from '@angular/router';
-import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 @NgModule({
   imports: [
@@ -15,9 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule.forChild([
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: 'details/:id', component: DetailsComponent },
-      { path: 'create', component: ProductCreateComponent, canActivate: [AuthGuard] },
-      { path: 'edit/:id', component: ProductEditComponent, canActivate: [AuthGuard] },
-      { path: 'delete/:id', component: ProductDeleteComponent, canActivate: [AuthGuard] }
+      { path: 'create', component: ProductCreateComponent, canActivate: [AdminGuard] },
+      { path: 'edit/:id', component: ProductEditComponent, canActivate: [AdminGuard] },
+      { path: 'delete/:id', component: ProductDeleteComponent, canActivate: [AdminGuard] }
     ])
   ],
   declarations: [

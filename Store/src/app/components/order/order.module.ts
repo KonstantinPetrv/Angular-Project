@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { OrderCheckoutComponent } from './order-checkout/order-checkout.component';
 import { OrderService } from 'src/app/core/services/order.service';
 import { OrderPendingComponent } from './order-pending/order-pending.component';
+import { AdminGuard } from 'src/app/core/guards/admin.guard';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import { OrderPendingComponent } from './order-pending/order-pending.component';
     RouterModule.forChild([
       { path: '', pathMatch: 'full', redirectTo: 'home' },
       { path: 'checkout', component: OrderCheckoutComponent },
-      { path: 'pending', component: OrderPendingComponent }
+      { path: 'pending', component: OrderPendingComponent, canActivate: [AdminGuard] }
     ])
   ],
   declarations: [
