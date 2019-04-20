@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { OrderService } from 'src/app/core/services/order.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-order-checkout',
@@ -14,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class OrderCheckoutComponent implements OnInit {
   products$: Observable<Array<Product>>;
   constructor(
+    public authService: AuthService,
     private productService: ProductService,
     private orderService: OrderService,
     private router: Router,
@@ -30,6 +32,9 @@ export class OrderCheckoutComponent implements OnInit {
   postOrder() {
     let ids = localStorage.getItem('cart').trim().split(',');
     ids.shift();
+    if (ids.length === 0) {
+      return;
+    }
     let data = {
       products: ids
     }
@@ -52,9 +57,5 @@ export class OrderCheckoutComponent implements OnInit {
     let ids = localStorage.getItem('cart').trim().split(',');
     ids.shift();
     this.products$ = this.productService.getCartProducts(ids)
-  }
-
-  emptyCart() {
-    localStorage.setItem('cart', '');
   }
 }
