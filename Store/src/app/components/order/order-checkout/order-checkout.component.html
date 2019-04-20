@@ -14,7 +14,8 @@
           <tr>
             <td>
               <div class="col-xs-12 image-container float-left">
-                <a [routerLink]="['/product/details', p._id]"> <img class="cart-thumbnails" [src]="p.image" alt="missing" />
+                <a [routerLink]="['/product/details', p._id]"> <img class="cart-thumbnails" [src]="p.image"
+                    alt="missing" />
                 </a>
               </div>
               <div class="col-xs-12">
@@ -30,7 +31,7 @@
             </td>
             <td>
               <div class="float-right ml-3">
-                <button type="button" class="btn btn-danger close">&times;</button>
+                <button type="button" class="btn btn-danger close" (click)="removeItem(p._id)">&times;</button>
               </div>
             </td>
           </tr>

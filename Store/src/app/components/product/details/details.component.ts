@@ -43,9 +43,7 @@ export class DetailsComponent implements OnInit {
   }
 
   removeFromCart() {
-    let tempCart = [...window.localStorage.getItem('cart').trim().split(',')]
-    tempCart.splice(tempCart.indexOf(this.id), 1);
-    window.localStorage.setItem('cart', tempCart.join(','));
+    this.productService.removeFromCart(this.id);
     this.actionType = true;
   }
 

@@ -40,6 +40,12 @@ export class ProductService {
     deleteProduct(id) {
         return this.http.delete(deleteP + id);
     }
+
+    removeFromCart(id) {
+        let tempCart = [...window.localStorage.getItem('cart').trim().split(',')]
+        tempCart.splice(tempCart.indexOf(id), 1);
+        window.localStorage.setItem('cart', tempCart.join(','));
+    }
 }
 
 // getUserFurniture(): Observable<Array<Product>> {

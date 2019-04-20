@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../../shared/models/order.model';
 import { OrderService } from 'src/app/core/services/order.service';
@@ -26,6 +26,7 @@ export class OrderPendingComponent implements OnInit {
           return;
         }
         this.toastr.success('Order approved.');
+        this.orders$ = this.orderService.getPendingOrders();
       })
   }
 
@@ -38,6 +39,7 @@ export class OrderPendingComponent implements OnInit {
           return;
         }
         this.toastr.success('Order canceled');
+        this.orders$ = this.orderService.getPendingOrders();
       })
   }
 

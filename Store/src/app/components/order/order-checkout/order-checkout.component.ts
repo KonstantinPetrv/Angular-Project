@@ -26,9 +26,6 @@ export class OrderCheckoutComponent implements OnInit {
     this.products$ = this.productService.getCartProducts(ids)
   }
 
-  emptyCart() {
-    localStorage.setItem('cart', '');
-  }
 
   postOrder() {
     let ids = localStorage.getItem('cart').trim().split(',');
@@ -47,5 +44,17 @@ export class OrderCheckoutComponent implements OnInit {
         localStorage.setItem('cart', '');
         this.router.navigate(['/']);
       });
+  }
+
+  removeItem(id) {
+    this.productService.removeFromCart(id)
+
+    let ids = localStorage.getItem('cart').trim().split(',');
+    ids.shift();
+    this.products$ = this.productService.getCartProducts(ids)
+  }
+
+  emptyCart() {
+    localStorage.setItem('cart', '');
   }
 }
