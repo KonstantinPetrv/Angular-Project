@@ -14,8 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', redirectTo: 'home' },
-      { path: 'create', component: ProductCreateComponent, canActivate: [AuthGuard] },
       { path: 'details/:id', component: DetailsComponent },
+      { path: 'create', component: ProductCreateComponent, canActivate: [AuthGuard] },
       { path: 'edit/:id', component: ProductEditComponent, canActivate: [AuthGuard] },
       { path: 'delete/:id', component: ProductDeleteComponent, canActivate: [AuthGuard] }
     ])
@@ -24,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DetailsComponent,
     ProductEditComponent,
     ProductCreateComponent,
-    ProductDeleteComponent
+    ProductDeleteComponent,
   ]
 })
 export class ProductModule { }

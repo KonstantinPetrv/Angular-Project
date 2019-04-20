@@ -9,6 +9,7 @@ const getSingleP = baseUrl + '/details/';
 const postP = baseUrl + '/create';
 const putP = baseUrl + '/edit/';
 const deleteP = baseUrl + '/delete/';
+const cartP = baseUrl + '/order';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +27,10 @@ export class ProductService {
 
     getAllProducts() {
         return this.http.get<Array<Product>>(getAllP);
+    }
+
+    getCartProducts(id) {
+        return this.http.post<Array<Product>>(cartP, id);
     }
 
     getProduct(id): Observable<Product> {
