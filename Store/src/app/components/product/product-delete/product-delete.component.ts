@@ -24,7 +24,10 @@ export class ProductDeleteComponent implements OnInit {
       this.id = data['id'];
       this.productService.getProduct(this.id).subscribe((data) => {
         this.product = data['product'];
-      })
+        if(this.product == null){
+		this.router.navigate(['/']);
+		}
+	  })
     })
   }
 
@@ -33,7 +36,6 @@ export class ProductDeleteComponent implements OnInit {
       .deleteProduct(this.id)
       .subscribe((data) => {
         this.toastr.success('Product deleted');
-        this.router.navigate(['/']);
       })
   }
 }
